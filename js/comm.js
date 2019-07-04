@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 	//banner
-    $('#banner').easyFader();
+    $('#banner').easyFader();//EasyFader – jQuery轻量级响应式幻灯片插件 http://www.dowebok.com/222.html
 	
 	//nav
 	var oH2 = document.getElementById("mnavh"); 
