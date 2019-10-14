@@ -1,0 +1,175 @@
+<!doctype html >
+<html ng-app="blogFront" ng-controller="infoController" ng-init="loadInfo()">
+<head>
+  <meta charset="gbk">
+  <title>{{resultMap.article.title}}</title>
+  <meta name="keywords" content="杨铭森的个人博客,yangmingsen,{{resultMap.article.keywords}}" />
+  <meta name="description" content="yangmingsen个人博客,分享知识,分享生活,与时俱进,共同成长;{{resultMap.article.keywords}}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/add.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
+  <link href="css/info.css" rel="stylesheet">
+  <link href="css/m.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/editormd.css">
+
+  <script src="./plugins/angularjs/angular.min.js"></script>
+  <script src="./js/base.js"></script>
+  <script src="./js/service/infoService.js"></script>
+  <script src="./js/controller/infoController.js"></script>
+
+  <script src="js/jquery.min.js" ></script>
+  <script src="js/jquery.easyfader.min.js"></script>
+  <script src="js/hc-sticky.js"></script>
+  <script src="js/comm.js"></script>
+  <script src="js/scrollReveal.js"></script>
+  <!--[if lt IE 9]>
+  <script src="js/modernizr.js"></script>
+  <![endif]-->
+  <style>
+
+  </style>
+</head>
+<body >
+<header class="header-navigation" id="header">
+  <nav>
+    <div class="logo"><a href="###">杨铭森个人博客</a></div>
+    <h2 id="mnavh"><span class="navicon"></span></h2>
+    <ul id="starlist">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="list.html">文章</a></li>
+      <li><a href="share.html">相册</a></li>
+      <li><a href="about.html">我嘛</a></li>
+      <li><a href="time.html">时间轴</a></li>
+    </ul>
+    <div class="searchbox">
+      <div id="search_bar" class="search_bar">
+        <form  id="searchform" action="[!--news.url--]e/search/index.php" method="post" name="searchform">
+          <input class="input" placeholder="想搜点什么呢.." type="text" name="keyboard" id="keyboard">
+          <input type="hidden" name="show" value="title" />
+          <input type="hidden" name="tempid" value="1" />
+          <input type="hidden" name="tbname" value="news">
+          <input type="hidden" name="Submit" value="搜索" />
+          <p class="search_ico"> <span></span></p>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+<article>
+  <main>
+    <div class="infosbox">
+      <div class="newsview">
+        <h3 class="news_title">{{resultMap.article.title}}</h3>
+        <div class="bloginfo">
+          <ul>
+            <li class="author">作者：<a href="/">杨铭森</a></li>
+            <li class="lmname"><a href="/">{{resultMap.categoryName}}</a></li>
+            <li class="timer">时间：{{resultMap.article.updateTime}}</li>
+            <li class="view">{{resultMap.article.browseNum}}人已阅读</li>
+          </ul>
+        </div>
+        <div class="tags"><a ng-repeat="tag in resultMap.tagNames" href="{{tag.id}}" target="_blank">{{tag.tagName}}</a></div>
+        <div class="news_about"><strong>简介</strong>{{resultMap.article.abstractContent}}</div>
+
+        <div class="markdown-body editormd-preview-container">
+          <div ng-bind-html="resultMap.article.content">      </div>
+        </div>
+
+      </div>
+      <div class="share">
+        <p class="diggit"><a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum"><script type="text/javascript" src="/e/public/ViewClick/?classid=2&id=20&down=5"></script>{{resultMap.article.likeNum}}</b>)</p>
+      </div>
+      <div class="nextinfo">
+        <!--<p>上一篇：<a href="###">作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</a></p>-->
+        <!--<p>下一篇：<a href="##">返回列表</a></p>-->
+      </div>
+      <div class="news_pl">
+        <h2>文章评论</h2>
+        <ul>
+          <div class="gbko">
+            <div class="fb" ng-repeat="cmt in resultMap.comments">
+              <ul style="background: url(./images/anonymous/tx{{cmt.index}}.jpg) no-repeat top 10px left 10px ;">
+                <p class="fbtime"><span>{{cmt.username}} </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{cmt.createdTime}}</p>
+                <p class="fbinfo">{{cmt.content}}</p>
+              </ul>
+            </div>
+
+            <form action="##" ng-if="resultMap.article.allowComment">
+              <div id="plpost">
+                <p class="saying">来说两句吧...</p>
+                <p class="yname"><span>用户名:</span><input name="username" type="text" class="inputText" id="username" value="" size="16"></p>
+                <textarea name="saytext" rows="6" id="saytext"></textarea>
+                <input name="imageField" type="submit" value="提交">
+
+              </div>
+            </form>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <aside class="r_box" >
+    <div class="wdxc">
+      <h2>图文精选</h2>
+      <ul>
+        <li><a href="/"><img src="images/7.jpg"></a></li>
+        <li><a href="/"><img src="images/8.jpg"></a></li>
+        <li><a href="/"><img src="images/9.jpg"></a></li>
+        <li><a href="/"><img src="images/10.jpg"></a></li>
+        <li><a href="/"><img src="images/11.jpg"></a></li>
+        <li><a href="/"><img src="images/12.jpg"></a></li>
+      </ul>
+    </div>
+    <div class="fenlei">
+      <h2>文章分类</h2>
+      <ul>
+        <li ng-repeat="ctg in resultMap.categorys"><a href="./list.html#?categoryId={{ctg.id}}" target="_blank">{{ctg.categoryName}}</a></li>
+      </ul>
+    </div>
+    <div class="cloud">
+      <h2>标签云</h2>
+      <ul>
+        <a ng-repeat="tag in resultMap.tags" href="./list.html#?tagId={{tag.id}}" target="_blank">{{tag.tagName}}</a>
+      </ul>
+    </div>
+    <div class="tuijian">
+      <h2 id="tab"><a href="#"class="current">点击排行</a><a href="#">站长推荐</a></h2>
+      <div id="content">
+        <ul style="display:block;">
+          <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+          <li><a href="/">【活动作品】柠檬绿兔小白个人博客模板</a></li>
+          <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+          <li><a href="/">2014年度优秀个人博客评选活动</a></li>
+          <li><a href="/">你是什么人便会遇上什么人</a></li>
+          <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+          <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+          <li><a href="/">个人博客模板《绅士》后台管理</a></li>
+        </ul>
+        <ul>
+          <li><a href="/">个人博客，我为什么要用帝国cms？</a></li>
+          <li><a href="/">D设计师博客-一个热爱生活的设计师</a></li>
+          <li><a href="/">东轩博客，我看到了你的坚持！</a></li>
+          <li><a href="/">程序员创业，就得“豁得出去”！</a></li>
+          <li><a href="/">张建华 一个90后年轻站长！我们是对手亦是朋友！</a></li>
+          <li><a href="/">《奋斗电商》看知名微商如何做博客引流？</a></li>
+          <li><a href="/">《寻之旅》一个关于旅游，游记的个人博客</a></li>
+          <li><a href="/">【匆匆那些年】总结个人博客经历的这四年</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="guanzhu">
+      <h2>关注我 么么哒</h2>
+      <ul>
+        <img src="images/wx.jpg">
+      </ul>
+    </div>
+
+  </aside>
+</article>
+<footer>
+  <p>Design by <a href="###" target="_blank">yangmingsen个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
+</footer>
+<a href="#" class="cd-top">Top</a>
+</body>
+</html>
